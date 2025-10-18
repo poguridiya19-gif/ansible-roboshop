@@ -1,4 +1,4 @@
-- name: vreate ec2 and r53
+- name: create ec2 and r53
   hosts: local
   connection: local
   vars:
