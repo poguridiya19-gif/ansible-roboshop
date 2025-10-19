@@ -12,9 +12,9 @@
      name: rabbitmq-server
      state: present
 
-  - name: start and enable redis
+  - name: start and enable server
     ansible.builtin.service:
-      name: redis
+      name: rabbitmq
       state: started
       enabled: yes
 
