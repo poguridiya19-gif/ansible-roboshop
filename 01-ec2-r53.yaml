@@ -6,8 +6,8 @@
    sg_id: sg-06a9a911c558d1529 # replace with your SG ID
    zone_id: "Z09362922S2ZXJ8DP3JCV" # replace with your id
    domain_name: "poguri.fun"
-  #  instances:
-  #  - mongodb
+   instances:
+   - mongodb
   tasks:
     - name: create ec2 instance
       amazon.aws.ec2_instance:
