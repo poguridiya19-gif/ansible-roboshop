@@ -6,8 +6,8 @@
    sg_id: sg-06a9a911c558d1529 # replace with your SG ID
    zone_id: "Z09362922S2ZXJ8DP3JCV" # replace with your id
    domain_name: "poguri.fun"
-   instances:
-   - mongodb
+  #  instances:
+  #  - mongodb
   tasks:
     - name: create ec2 instance
       amazon.aws.ec2_instance:
@@ -34,3 +34,26 @@
         msg: "{{ item.instances[0].private_ip_address }}"
       loop: "{{ ec2_output.results }}"
     
+    - name: create route53 record
+      amazon.aws.route53:
+        state: present
+        zone: "{{ domain_name }}"
+        record: "{{ item.item }}.{{ domain_name }}" # mongodb.poguri.fun
+        type: A
+        ttl: 1
+        value: "{{ item.instances[0].private_ip_address }}"
+        overwrite: true
+      loop: "{{ ec2_output.results }}"
+
+     # we are creating one record with public only for frontend
+    - name: create route53 record for frontend
+      amazon.aws.route53:
+        state: present
+        zone: "{{ domain_name }}"
+        record: "{{ domain_name }}" # poguri.fun
+        type: A
+        ttl: 1
+        value: "{{ item.instances[0].public_ip_address }}"
+        overwrite: true
+      when: item.item == "frontend"
+      loop: "{{ ec2_output.results }}"
