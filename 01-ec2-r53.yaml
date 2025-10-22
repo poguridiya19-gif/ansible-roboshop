@@ -7,8 +7,8 @@
    zone_id: "Z09362922S2ZXJ8DP3JCV" # replace with your id
    domain_name: "poguri.fun"
    instances:
-    - rabbitmq
-    #  redis
+    - shipping
+    # redis
     # mongodb
   tasks:
     - name: create ec2 instance
@@ -48,7 +48,7 @@
       loop: "{{ ec2_output.results }}"
 
      # we are creating one record with public only for frontend
-    - name: create route53 record for frontend
+    - name: create route53 record 
       amazon.aws.route53:
         state: present
         zone: "{{ domain_name }}"
@@ -57,5 +57,5 @@
         ttl: 1
         value: "{{ item.instances[0].public_ip_address }}"
         overwrite: true
-      when: item.item == "frontend"
+      when: item.item 
       loop: "{{ ec2_output.results }}"
