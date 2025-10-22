@@ -16,7 +16,7 @@
       name: "{{ item }}"
     loop:
     - cryptography
-    - PyMsql
+    - PyMysql
 
   - name: create roboshop system user
     ansible.builtin.user:
