@@ -54,7 +54,7 @@
 
   - name: copy cart service
     ansible.builtin.copy:
-      src: user.service
+      src: cart.service
       dest: etc/systemd/system/cart.service
 
   - name: deamon reload enable and start
