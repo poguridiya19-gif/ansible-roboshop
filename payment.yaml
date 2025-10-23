@@ -4,7 +4,7 @@
   tasks:
   - name: install python package
     ansible.builtin.dnf:
-    - name: "{{ item }}"
+      name: "{{ item }}"
       state: present
     loop:
     - python3
@@ -19,7 +19,7 @@
       shell: /sbin/nologin
       home: /app
 
-   # Safe to remove directory, because 2nd time if we run it will download freshly. no error if does not exist
+  # Safe to remove directory, because 2nd time if we run it will download freshly. no error if does not exist
   - name: remove app directory
     ansible.builtin.file:
       path: /app
@@ -62,6 +62,6 @@
     ansible.builtin.systemd_service:
       name: payment
       enabled: true
-      start: started
-      deamon_reload: true
+      state: started
+      daemon_reload: true
 
