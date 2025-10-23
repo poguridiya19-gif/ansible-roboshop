@@ -7,7 +7,7 @@
    zone_id: "Z09362922S2ZXJ8DP3JCV" # replace with your id
    domain_name: "poguri.fun"
    instances:
-    - cart
+    - shipping
     # redis
     # mongodb
   tasks:
