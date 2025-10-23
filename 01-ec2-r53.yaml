@@ -11,6 +11,11 @@
     # redis
     # mongodb
   tasks:
+    - name: install ansible package
+      ansible.builtin.dnf:
+        name: ansible
+        state: present
+        
     - name: create ec2 instance
       amazon.aws.ec2_instance:
         name: "{{ item }}"
