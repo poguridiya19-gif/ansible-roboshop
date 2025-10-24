@@ -57,9 +57,9 @@
       src: catalogue.service
       dest: /etc/systemd/system/catalogue.service
 
-  - name: copy mongodb repo
+  - name: copy mongo repo
     ansible.builtin.copy:
-      src: mongodb.repo
+      src: mongo.repo
       dest: /etc/yum.repos.d/mongo.repo
 
   - name: insatll mongodb client
@@ -68,7 +68,7 @@
       state: present
 
   - name: connect mongodb to catalogue
-    ansible.builtin.command: mongosh mongodb.daws86s.fun --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')"
+    ansible.builtin.command: mongosh mongodb.poguri.fun --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')"
     register: catalogue_output
 
   - name: evaluate catalogue database
@@ -88,13 +88,13 @@
   - name: start and enable catalogue
     ansible.builtin.service:
       name: catalogue
-      start: started
+      state: started
       enabled: yes
 
-  - name: deamon reload enable and start
+  - name: daemon reload enable and start
     ansible.builtin.systemd_service:
     name: catalogue
-    start: started
+    state: started
     enable: true
     deamon_reload: true
 
