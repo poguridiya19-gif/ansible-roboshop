@@ -29,8 +29,8 @@
 
   - name: create app directory
     ansible.builtin.file:
-    state: directory
-    path: /app
+      state: directory
+      path: /app
 
   - name: Delete catalogue file
     ansible.builtin.file:
@@ -62,7 +62,7 @@
       src: mongo.repo
       dest: /etc/yum.repos.d/mongo.repo
 
-  - name: insatll mongodb client
+  - name: install mongodb client
     ansible.builtin.package:
       name: mongodb-mongosh
       state: present
@@ -73,7 +73,7 @@
 
   - name: evaluate catalogue database
     community.mongodb.mongodb_shell:
-      login_host: poguri.fun
+      login_host:  poguri.fun
       eval: db.getMongo().getDBnames().indexOf('catalogue')
     register: catalogue_output
 
@@ -96,5 +96,5 @@
     name: catalogue
     state: started
     enable: true
-    deamon_reload: true
+    daemon_reload: true
 
